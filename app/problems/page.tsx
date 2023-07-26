@@ -7,6 +7,12 @@ import {Problem} from "@/components/Problem";
 import styles from './problems.module.scss'
 import {Button} from "@/components/ui/button";
 import {AddProblem} from "@/components/AddProblem";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'App | Problems',
+    description: 'Admin panel app',
+}
 
 const ProblemsPage = () => {
     return (

@@ -8,6 +8,12 @@ import {ArrowLeftFromLine} from "lucide-react";
 import Link from "next/link";
 import {Problems} from "@/data/Problems";
 import {IProblem} from "@/models/IProblem";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'App | Problem',
+    description: 'Admin panel app',
+}
 
 const ProblemPage = ({ params }: { params: { id: string } }) => {
     const curProblem : IProblem | undefined = Problems.find((problem) => problem.id === Number(params.id))

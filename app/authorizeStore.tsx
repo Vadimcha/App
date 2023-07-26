@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import {IUser} from "@/models/IUser";
+import {Users} from "@/data/Users";
 
 interface Authorize {
     authorize: boolean,
@@ -9,8 +10,8 @@ interface Authorize {
 }
 
 export const useAuthorize = create<Authorize>((set) => ({
-    authorize: false,
-    currentUser: null,
+    authorize: true,
+    currentUser: Users[1],
     logOut: () =>
         set((state) => ({
             authorize: false,

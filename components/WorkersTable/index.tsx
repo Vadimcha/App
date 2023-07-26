@@ -1,4 +1,4 @@
-    "use client"
+"use client"
 import * as React from "react"
 import {
     ColumnDef,
@@ -33,9 +33,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+
 import {IUser} from "@/models/IUser";
 import {Users} from "@/data/Users";
-
 
 const data = Users
 export const columns: ColumnDef<IUser>[] = [

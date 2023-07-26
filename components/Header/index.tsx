@@ -38,8 +38,8 @@ const Header = ({ without_buttons = false } : HeaderProps) => {
                         <></>
                          :
                         <div className={styles.btnGroup}>
-                            <Button onClick={() => logIn(Users[0])}>Login</Button>
-                            <Button variant="secondary">Sign In</Button>
+                            <Button asChild><Link href={'/login'}>Login</Link></Button>
+                            <Button variant="secondary" asChild><Link href={'/signin'}>Sign In</Link></Button>
                         </div>
                     }
                 </div>

@@ -20,6 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import {Roles} from "@/models/IUser";
 
 export function AddProblem() {
     return (
@@ -54,10 +55,9 @@ export function AddProblem() {
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                    <SelectItem value="Сантехник">Сантехник</SelectItem>
-                                    <SelectItem value="Бухгалтер">Бухгалтер</SelectItem>
-                                    <SelectItem value="Психолог">Психолог</SelectItem>
-                                    <SelectItem value="Программист">Программист</SelectItem>
+                                    { Roles.map((role) => {
+                                        return <SelectItem value={role} key={role}>{role}</SelectItem>
+                                    }) }
                                 </SelectGroup>
                             </SelectContent>
                         </Select>

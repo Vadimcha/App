@@ -3,6 +3,12 @@ import Content from "@/components/Content";
 import {H4} from "@/components/Typography";
 import {AddWorker} from "@/components/AddWorker";
 import {WorkersTable} from "@/components/WorkersTable";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'App | Workers',
+    description: 'Admin panel app',
+}
 
 const Workers = () => {
     return (
