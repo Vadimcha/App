@@ -1,0 +1,17 @@
+.topPart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.dscr {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: grey;
+  &>p {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
