@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 50px;
+}
+.leftPart {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  .btnGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
