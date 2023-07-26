@@ -4,11 +4,13 @@ export const Users : IUser[] = [
     {
         id: 0,
         name: "John Silver",
-        role: 'Сантехник'
+        role: 'Сантехник',
+        email: 'Superman@sosi.com'
     },
     {
         id: 1,
         name: "Mike Vazovsky",
-        role: 'Бухгалтер'
-    }
+        role: 'Бухгалтер',
+        email: 'superman@sosi.com'
+    },
 ]
