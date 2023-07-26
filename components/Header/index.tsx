@@ -10,8 +10,11 @@ import {Users} from "@/data/Users";
 import MyLink from "@/components/MyLink";
 import Link from "next/link";
 
+interface HeaderProps {
+    without_buttons?: boolean,
+}
 
-const Header = () => {
+const Header = ({ without_buttons = false } : HeaderProps) => {
     const links = [{ value: "Задачи", url: "/problems"}, { value: "Сотрудники", url: "/workers"}]
     const { authorize, logIn } = useAuthorize()
     return (
@@ -31,10 +34,14 @@ const Header = () => {
                         return <MyLink href={link.url} key={link.url}>{link.value}</MyLink>
                     })) }
                     <ThemeToggler />
-                    <div className={styles.btnGroup}>
-                        <Button onClick={() => logIn(Users[0])}>Login</Button>
-                        <Button variant="secondary">Sign In</Button>
-                    </div>
+                    { without_buttons ?
+                        <></>
+                         :
+                        <div className={styles.btnGroup}>
+                            <Button onClick={() => logIn(Users[0])}>Login</Button>
+                            <Button variant="secondary">Sign In</Button>
+                        </div>
+                    }
                 </div>
             }
         </div>

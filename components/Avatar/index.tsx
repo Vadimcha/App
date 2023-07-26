@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from 'next/link'
 import { useAuthorize } from '@/app/authorizeStore'
+import { P } from '@/components/Typography'
 
 const MyAvatar = () => {
     const { currentUser, logOut } = useAuthorize();
@@ -23,6 +24,7 @@ const MyAvatar = () => {
 
             <DropdownMenuContent>
                 <DropdownMenuLabel>{ currentUser?.name }</DropdownMenuLabel>
+                <DropdownMenuLabel>{ currentUser?.role }</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <Link href={'/profile'}>Profile</Link>
