@@ -32,6 +32,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import {useState} from "react";
+import {Roles} from "@/models/IUser";
 
 export function AddWorker() {
     const [date, setDate] = useState<Date>()
@@ -98,11 +99,9 @@ export function AddWorker() {
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                    <SelectItem value="Администратор">Администратор</SelectItem>
-                                    <SelectItem value="Сантехник">Сантехник</SelectItem>
-                                    <SelectItem value="Бухгалтер">Бухгалтер</SelectItem>
-                                    <SelectItem value="Психолог">Психолог</SelectItem>
-                                    <SelectItem value="Программист">Программист</SelectItem>
+                                    { Roles.map((role) => {
+                                        return <SelectItem value={role} key={role}>{role}</SelectItem>
+                                    }) }
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
