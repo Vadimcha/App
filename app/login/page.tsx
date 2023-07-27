@@ -78,8 +78,8 @@ const LogIn = () => {
                         <H3>Здравствуйте, {currentUser?.name}</H3> :
                         <H3>Код неверный, попытайтесь еще раз и проверьте правильность почты</H3>,
             'FirstButton': authorize ?
-                            <Button asChild><Link href='/'>Перейти на главную</Link></Button> :
-                            <Button variant="outline" onClick={() => {
+                            <Button className="w-[100%]" asChild><Link href='/'>Перейти на главную</Link></Button> :
+                            <Button className="w-[100%]" variant="outline" onClick={() => {
                             setStage(prev => prev - 2)
                             setProgress(5)
                             }}>Начать с начала</Button>,
