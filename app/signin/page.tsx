@@ -26,7 +26,7 @@ import { Progress } from "@/components/ui/progress"
 import {useAuthorize} from "@/app/authorizeStore";
 import {H3} from "@/components/Typography";
 import Link from "next/link";
-import {Roles} from "@/models/IUser";
+import {IUser, Roles} from "@/models/IUser";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {cn} from "@/lib/utils";
 import {Calendar as CalendarIcon} from "lucide-react";
@@ -43,7 +43,7 @@ interface Stage {
 const SignIn = () => {
     const [stage, setStage] = useState(0)
     const [progress, setProgress] = React.useState(5)
-    const { authorize, currentUser } = useAuthorize()
+    const authorize : boolean = useAuthorize(state => authorize), currentUser : IUser = useAuthorize(state => currentUser)
     const [date, setDate] = useState<Date>()
 
     const stageContent : Stage[] = [

@@ -17,6 +17,7 @@ import { Progress } from "@/components/ui/progress"
 import {useAuthorize} from "@/app/authorizeStore";
 import {H3} from "@/components/Typography";
 import Link from "next/link";
+import {IUser} from "@/models/IUser";
 
 interface Stage {
     'CardDescription': ReactNode,
@@ -28,8 +29,7 @@ interface Stage {
 const LogIn = () => {
     const [stage, setStage] = useState(0)
     const [progress, setProgress] = React.useState(5)
-    const { authorize, currentUser } = useAuthorize()
-
+    const authorize : boolean = useAuthorize(state => authorize), currentUser : IUser = useAuthorize(state => currentUser)
     const stageContent : Stage[] = [
         {
             'CardDescription': <CardDescription>Введите почту и пароль, чтобы войти в аккаунт</CardDescription>,
