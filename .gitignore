@@ -2,7 +2,6 @@
 
 # docker
 /db/dockerfiles
-/db
 
 # prisma
 /prisma/migrations
