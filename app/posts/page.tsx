@@ -3,11 +3,15 @@ import React, {useEffect} from 'react';
 
 async function getPosts() {
     const res = await fetch("/api/getPosts")
+    return res.json()
 }
 
 const Posts = () => {
     useEffect(() => {
-        console.log(getPosts())
+        getPosts().then((value) => {
+
+        })
+        // console.log(getPosts())
     }, [])
     return (
         <div>

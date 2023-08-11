@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, {useEffect, useState} from 'react';
 import Header from "@/components/Header";
 import Content from "@/components/Content";
 import {H2, P} from "@/components/Typography";
@@ -8,16 +9,19 @@ import {ArrowLeftFromLine} from "lucide-react";
 import Link from "next/link";
 import {Problems} from "@/data/Problems";
 import {IProblem} from "@/models/IProblem";
-import {Metadata} from "next";
 
-export const metadata: Metadata = {
-    title: 'App | Problem',
-    description: 'Admin panel app',
+async function getProblems(id: string) {
+    const res = await fetch(`/api/problem/${id}`)
+    return res.json()
 }
 
 const ProblemPage = ({ params }: { params: { id: string } }) => {
-    const curProblem : IProblem | undefined = Problems.find((problem) => problem.id === Number(params.id))
-
+    const [curProblem, setCurProblem] = useState<IProblem | undefined>()
+    useEffect(() => {
+        getProblems(params.id).then((res) =>{
+            setCurProblem(res);
+        })
+    }, [])
     return (
         <div>
             <Header />
