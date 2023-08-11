@@ -28,7 +28,7 @@ const ProblemPage = ({ params }: { params: { id: string } }) => {
             <Content>
                 <div className={styles.topPart}>
                     <H2>{curProblem?.title}</H2>
-                    <Button variant="outline" size="icon">
+                    <Button variant="outline" size="icon" asChild>
                         <Link href={'/problems'}><ArrowLeftFromLine className="h-4 w-4" /></Link>
                     </Button>
                 </div>

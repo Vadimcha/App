@@ -10,7 +10,6 @@ export async function GET(request : NextRequest, { params }: { params: { id: str
         })
         return NextResponse.json(data);
     } catch(err) {
-        return NextResponse.json({ message: "Some error with fetching posts" }, { status: 500 });
+        return NextResponse.json({ message: "Some error with fetching problem data" }, { status: 500 });
     }
-    return NextResponse.json({ message: "Hello World" }, { status: 200 });
 }
