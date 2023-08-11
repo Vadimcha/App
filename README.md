@@ -1,14 +1,5 @@
 ## Start Project:
 
-Add db/.env and set content like this
-```bash
-# Database env
-POSTGRES_USER=username
-POSTGRES_PASSWORD=password
-POSTGRES_DB=db_name
-# POV Если менять значения, то надо удалять dockerfiles и пересобирать контейнер
-```
-And then
 ```bash
 yarn or npm install
 
