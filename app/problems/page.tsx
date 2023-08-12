@@ -2,18 +2,16 @@
 import Header from "@/components/Header";
 import Content from "@/components/Content";
 import {H3, H4} from "@/components/Typography";
-// import {Problems} from '@/data/Problems'
 import {IProblem} from "@/models/IProblem";
 import {Problem} from "@/components/Problem";
 import styles from './problems.module.scss'
-import {Button} from "@/components/ui/button";
 import {AddProblem} from "@/components/AddProblem";
-import {Metadata} from "next";
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 async function getProblems() {
-    const res = await fetch("/api/getProblems")
-    return res.json()
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API}api/getProblems`).then(res => res.data)
+    return res
 }
 
 const ProblemsPage = () => {

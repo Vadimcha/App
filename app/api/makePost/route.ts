@@ -3,7 +3,8 @@ import prisma from "@/prisma/client";
 
 export async function POST(request : NextRequest) {
     try {
-        const data = await request.json();
+        const req = await request.json();
+        const data = req.data
         const problem = await prisma.problem.create({
             data: {
                 title: data.title,

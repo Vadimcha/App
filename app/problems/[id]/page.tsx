@@ -9,16 +9,17 @@ import {ArrowLeftFromLine} from "lucide-react";
 import Link from "next/link";
 import {Problems} from "@/data/Problems";
 import {IProblem} from "@/models/IProblem";
+import axios from "axios";
 
-async function getProblems(id: string) {
-    const res = await fetch(`/api/problem/${id}`)
-    return res.json()
+async function getProblem(id: string) {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API}api/problem/${id}`).then(res => res.data)
+    return res
 }
 
 const ProblemPage = ({ params }: { params: { id: string } }) => {
     const [curProblem, setCurProblem] = useState<IProblem | undefined>()
     useEffect(() => {
-        getProblems(params.id).then((res) =>{
+        getProblem(params.id).then((res) =>{
             setCurProblem(res);
         })
     }, [])
