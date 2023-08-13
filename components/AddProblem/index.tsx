@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -17,18 +16,17 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
 import {Roles} from "@/models/IUser";
 import {useFormik} from "formik";
-import axios from "axios";
-import {makePost} from "@/services/api_requests";
-
-
+import {makeProblem} from "@/services/api_requests";
+import {useToast} from "@/components/ui/use-toast";
 
 export function AddProblem() {
+    const { toast } = useToast()
+
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -36,15 +34,17 @@ export function AddProblem() {
             content: '',
             date: ''
         },
-        onSubmit: (values) => {
+        onSubmit: (async (values) => {
             const now = new Date();
             let day = now.getDate(), month = now.getMonth() + 1, year = now.getFullYear();
             values.date = `${(day < 10 ? `0${day}` : day)}.${(month < 10 ? `0${month}` : month)}.${year}`
-            console.log(makePost(values).then(res => {
-                // Надо будет сделать алерт
-                console.log(res)
-            }))
-        },
+            const res = await makeProblem(values)
+            console.log(res.message)
+            toast({
+                title: res.message,
+                description: res.description,
+            })
+        }),
     });
     return (
             <Dialog>
@@ -110,5 +110,6 @@ export function AddProblem() {
                     </form>
                 </DialogContent>
             </Dialog>
+
     )
 }
