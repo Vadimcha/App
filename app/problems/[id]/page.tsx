@@ -7,14 +7,8 @@ import styles from './problem.module.scss'
 import {Button} from "@/components/ui/button";
 import {ArrowLeftFromLine} from "lucide-react";
 import Link from "next/link";
-import {Problems} from "@/data/Problems";
 import {IProblem} from "@/models/IProblem";
-import axios from "axios";
-
-async function getProblem(id: string) {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API}api/problem/${id}`).then(res => res.data)
-    return res
-}
+import {getProblem} from "@/services/api_requests";
 
 const ProblemPage = ({ params }: { params: { id: string } }) => {
     const [curProblem, setCurProblem] = useState<IProblem | undefined>()

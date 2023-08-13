@@ -1,18 +1,13 @@
 'use client'
 import Header from "@/components/Header";
 import Content from "@/components/Content";
-import {H3, H4} from "@/components/Typography";
+import {H4} from "@/components/Typography";
 import {IProblem} from "@/models/IProblem";
 import {Problem} from "@/components/Problem";
 import styles from './problems.module.scss'
 import {AddProblem} from "@/components/AddProblem";
 import {useEffect, useState} from "react";
-import axios from "axios";
-
-async function getProblems() {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API}api/getProblems`).then(res => res.data)
-    return res
-}
+import {getProblems} from "@/services/api_requests";
 
 const ProblemsPage = () => {
     const [problems, setProblems] = useState<IProblem[] | undefined>()

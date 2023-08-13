@@ -24,13 +24,9 @@ import {
 import {Roles} from "@/models/IUser";
 import {useFormik} from "formik";
 import axios from "axios";
+import {makePost} from "@/services/api_requests";
 
-async function makePost(values: Object) {
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_API}api/makePost`, {
-        data: values,
-    }).then(res => res.data)
-    return res
-}
+
 
 export function AddProblem() {
     const formik = useFormik({
