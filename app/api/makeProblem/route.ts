@@ -13,9 +13,11 @@ export async function POST(request : NextRequest) {
                 role: data.role
             }
         })
+
         return NextResponse.json(
             {
                 message: "Успешно!",
+                id: problem.id,
                 description: `Задача "${(data.title.length > 10 ? `${data.title.slice(0, 10)}...` : data.title)}" успешно создана`,
                 status: 200,
             },
@@ -26,7 +28,7 @@ export async function POST(request : NextRequest) {
             {
                 message: "Что-то пошло не так",
                 description: String(err),
-                status: 50,
+                status: 404,
             },
             { status: 500 }
         );

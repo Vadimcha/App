@@ -23,10 +23,11 @@ import {Roles} from "@/models/IUser";
 import {useFormik} from "formik";
 import {makeProblem} from "@/services/api_requests";
 import {useToast} from "@/components/ui/use-toast";
+import {useRouter} from "next/navigation";
 
 export function AddProblem() {
     const { toast } = useToast()
-
+    const router = useRouter()
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -39,11 +40,11 @@ export function AddProblem() {
             let day = now.getDate(), month = now.getMonth() + 1, year = now.getFullYear();
             values.date = `${(day < 10 ? `0${day}` : day)}.${(month < 10 ? `0${month}` : month)}.${year}`
             const res = await makeProblem(values)
-            console.log(res.message)
             toast({
                 title: res.message,
                 description: res.description,
             })
+            await router.push(`${process.env.NEXT_PUBLIC_HOME_URL}/problems/${res.id}`);
         }),
     });
     return (

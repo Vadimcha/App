@@ -18,6 +18,9 @@ import {useAuthorize} from "@/app/authorizeStore";
 import {H3} from "@/components/Typography";
 import Link from "next/link";
 import {IUser} from "@/models/IUser";
+import {Users} from "@/data/Users";
+import {login} from "@/services/api_requests";
+import {AxiosError} from "axios";
 
 interface Stage {
     'CardDescription': ReactNode,
@@ -29,7 +32,7 @@ interface Stage {
 const LogIn = () => {
     const [stage, setStage] = useState(0)
     const [progress, setProgress] = React.useState(5)
-    const authorize : boolean = useAuthorize(state => authorize), currentUser : IUser = useAuthorize(state => currentUser)
+    const authorize : boolean = false, currentUser : IUser = Users[0]
     const stageContent : Stage[] = [
         {
             'CardDescription': <CardDescription>Введите почту и пароль, чтобы войти в аккаунт</CardDescription>,
@@ -46,9 +49,16 @@ const LogIn = () => {
                 </div>
             </form>,
             'FirstButton': <div></div>,
-            'SecondButton': <Button onClick={() => {
+            'SecondButton': <Button onClick={async () => {
                 setStage(prev => prev + 1)
                 setProgress(50)
+                try {
+                    const res = await login('admin', 'admin')
+                    alert(JSON.stringify(res))
+                } catch(err) {
+                    const error = err as AxiosError;
+                    alert(error.message)
+                }
             }}>Дальше</Button>,
         },
         {
@@ -57,7 +67,7 @@ const LogIn = () => {
                 <div className="grid w-full items-center gap-4">
                     <div className="flex flex-col space-y-1.5">
                         <Label htmlFor="code">Код подтверждения</Label>
-                        <Input id="code" placeholder="XXXX" autoComplete="off" />
+                        <Input id="code" placeholder="XXXX" autoComplete="off" autoCorrect="off" autoSave="off" />
                     </div>
                 </div>
             </form>,

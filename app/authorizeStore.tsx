@@ -10,8 +10,8 @@ interface Authorize {
 }
 
 export const useAuthorize = create<Authorize>((set) => ({
-    authorize: true,
-    currentUser: Users[1],
+    authorize: false,
+    currentUser: null,
     logOut: () =>
         set((state) => ({
             authorize: false,

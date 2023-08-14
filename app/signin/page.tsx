@@ -32,6 +32,7 @@ import {cn} from "@/lib/utils";
 import {Calendar as CalendarIcon} from "lucide-react";
 import {format} from "date-fns";
 import {Calendar} from "@/components/ui/calendar";
+import {Users} from "@/data/Users";
 
 interface Stage {
     'CardDescription': ReactNode,
@@ -43,7 +44,7 @@ interface Stage {
 const SignIn = () => {
     const [stage, setStage] = useState(0)
     const [progress, setProgress] = React.useState(5)
-    const authorize : boolean = useAuthorize(state => authorize), currentUser : IUser = useAuthorize(state => currentUser)
+    const authorize : boolean = false, currentUser : IUser = Users[1]
     const [date, setDate] = useState<Date>()
 
     const stageContent : Stage[] = [

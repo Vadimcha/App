@@ -10,10 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id      Int     @id @default(autoincrement())
-  title   String
-  content String?
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  role     String
+  email    String
+  password String
 }
 
 model Problem {
