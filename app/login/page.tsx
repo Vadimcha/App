@@ -52,13 +52,6 @@ const LogIn = () => {
             'SecondButton': <Button onClick={async () => {
                 setStage(prev => prev + 1)
                 setProgress(50)
-                try {
-                    const res = await login('admin', 'admin')
-                    alert(JSON.stringify(res))
-                } catch(err) {
-                    const error = err as AxiosError;
-                    alert(error.message)
-                }
             }}>Дальше</Button>,
         },
         {

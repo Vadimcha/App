@@ -10,6 +10,7 @@ import {
 import Link from 'next/link'
 import { useAuthorize } from '@/app/authorizeStore'
 import { P } from '@/components/Typography'
+import {logout} from "@/services/api_requests";
 
 const MyAvatar = () => {
     const { currentUser, logOut } = useAuthorize();
@@ -30,7 +31,10 @@ const MyAvatar = () => {
                     <Link href={'/profile'}>Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <button onClick={() => logOut()}>Log Out</button>
+                    <button onClick={async () => {
+                        await logout();
+                        logOut();
+                    }}>Log Out</button>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
