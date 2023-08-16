@@ -1,16 +1,16 @@
 import {cookies} from "next/headers";
 import {NextResponse} from "next/server";
-import {verify} from "jsonwebtoken";
+import {verify, decode} from "jsonwebtoken";
 
 export async function GET(request: Request) {
     const cookieStore = cookies()
-
-    const token = cookieStore.get("OutSiteJWT");
+    const token = cookieStore.get("OutSideJWT");
     if(!token) {
         return NextResponse.json({
             message: "Unauthorized",
+            verdict: false,
         }, {
-            status: 401,
+            status: 200,
         })
     }
     const { value } = token
@@ -18,18 +18,20 @@ export async function GET(request: Request) {
 
     try {
         verify(value, secret)
-
-        const response = {
+        return new Response(JSON.stringify({
             message: "Super",
-            jwt_token: value,
-        }
-        return new Response(JSON.stringify(response), { status: 200 })
+            id: decode(value),
+            verdict: true,
+        }), {
+            status: 200
+        })
     } catch(err) {
         return NextResponse.json({
             message: "Something went wrong ",
+            verdict: false,
+            id: -1,
         }, {
             status: 400,
         })
     }
-    console.log(token)
 }

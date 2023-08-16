@@ -12,14 +12,18 @@ interface Authorize {
 export const useAuthorize = create<Authorize>((set) => ({
     authorize: false,
     currentUser: null,
-    logOut: () =>
+    logOut: () => {
+        console.log(`BREAKPOINT STORE USER: logout`)
         set((state) => ({
             authorize: false,
             currentUser: null,
-        })),
-    logIn: (user) =>
+        }))
+    },
+    logIn: (user) => {
+        console.log(`BREAKPOINT STORE USER: ${user} with type ${typeof user}`)
         set((state) => ({
             authorize: true,
             currentUser: user,
         }))
+    }
 }));

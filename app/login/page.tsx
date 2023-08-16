@@ -19,8 +19,9 @@ import {H3} from "@/components/Typography";
 import Link from "next/link";
 import {IUser} from "@/models/IUser";
 import {Users} from "@/data/Users";
-import {login} from "@/services/api_requests";
+import {login, register} from "@/services/api_requests";
 import {AxiosError} from "axios";
+import {useFormik} from "formik";
 
 interface Stage {
     'CardDescription': ReactNode,
@@ -32,7 +33,22 @@ interface Stage {
 const LogIn = () => {
     const [stage, setStage] = useState(0)
     const [progress, setProgress] = React.useState(5)
-    const authorize : boolean = false, currentUser : IUser = Users[0]
+    const { logIn, authorize } = useAuthorize()
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        onSubmit: (async (values) => {
+            const res = await login(values)
+            if(res.authorize) {
+                logIn(values as IUser)
+            }
+        }),
+    });
+
+
     const stageContent : Stage[] = [
         {
             'CardDescription': <CardDescription>Введите почту и пароль, чтобы войти в аккаунт</CardDescription>,
@@ -40,11 +56,23 @@ const LogIn = () => {
                 <div className="grid w-full items-center gap-4">
                     <div className="flex flex-col space-y-1.5">
                         <Label htmlFor="email">Email</Label>
-                        <Input id="email" placeholder="Type email" type="email" />
+                        <Input
+                            id="email"
+                            placeholder="Type email"
+                            type="email"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                        />
                     </div>
                     <div className="flex flex-col space-y-1.5">
                         <Label htmlFor="password">Password</Label>
-                        <Input id="password" placeholder="Type password" type="password" />
+                        <Input
+                            id="password"
+                            placeholder="Type password"
+                            type="password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                        />
                     </div>
                 </div>
             </form>,
@@ -78,7 +106,7 @@ const LogIn = () => {
                                 <CardDescription>Успешно!</CardDescription> :
                                 <CardDescription>Что-то пошло не так</CardDescription>,
             'Content':  authorize ?
-                        <H3>Здравствуйте, {currentUser?.name}</H3> :
+                        <H3>Здравствуйте some name</H3> :
                         <H3>Код неверный, попытайтесь еще раз и проверьте правильность почты</H3>,
             'FirstButton': authorize ?
                             <Button className="w-[100%]" asChild><Link href='/'>Перейти на главную</Link></Button> :

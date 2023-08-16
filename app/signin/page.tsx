@@ -47,8 +47,7 @@ const SignIn = () => {
     const [stage, setStage] = useState(0)
     const [progress, setProgress] = React.useState(5)
     const [date, setDate] = useState<Date>()
-    const [authorize, setAuthorize] = useState<boolean>(false)
-    const { logIn } = useAuthorize()
+    const { logIn, authorize } = useAuthorize()
 
     const formik = useFormik({
         initialValues: {
@@ -59,10 +58,8 @@ const SignIn = () => {
         },
         onSubmit: (async (values) => {
             const res = await register(values)
-            setAuthorize(res.authorize)
             if(res.authorize) {
                 logIn(values as IUser)
-
             }
         }),
     });

@@ -3,7 +3,6 @@ import { deleteCookie } from 'cookies-next';
 
 export async function POST(request: NextRequest) {
     try {
-        deleteCookie('OutSideJWT');
         return new NextResponse(JSON.stringify({
             message: "Вы успешно вышли",
             err: null,
@@ -20,5 +19,4 @@ export async function POST(request: NextRequest) {
             status: 400,
         })
     }
-    // TODO сделать еще в сторе удаление пользователя
 }

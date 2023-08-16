@@ -32,7 +32,7 @@ const MyAvatar = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                     <button onClick={async () => {
-                        await logout();
+                        console.log(await logout());
                         logOut();
                     }}>Log Out</button>
                 </DropdownMenuItem>
