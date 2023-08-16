@@ -7,11 +7,14 @@ export async function POST(request: NextRequest) {
     try {
         const req = await request.json()
         const data = req.data
-        const user = await prisma.user.findUnique({
+        const user = await prisma.user.findFirst({
             where: {
                 email: data.email,
             },
         })
+        console.log(`BREAKPOINT LOGIN ${JSON.stringify(user)}`)
+        if(user != null)
+            console.log(`BREAKPOINT comapaaring ${await comparePassword(data.password, user.password)}`)
         if(user != null && await comparePassword(data.password, user.password)) {
             return await setCookie(user.id.toString())
         } else {

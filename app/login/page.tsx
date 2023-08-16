@@ -22,6 +22,7 @@ import {Users} from "@/data/Users";
 import {login, register} from "@/services/api_requests";
 import {AxiosError} from "axios";
 import {useFormik} from "formik";
+import {useRouter} from "next/navigation";
 
 interface Stage {
     'CardDescription': ReactNode,
@@ -34,6 +35,7 @@ const LogIn = () => {
     const [stage, setStage] = useState(0)
     const [progress, setProgress] = React.useState(5)
     const { logIn, authorize } = useAuthorize()
+    const {push} = useRouter()
 
     const formik = useFormik({
         initialValues: {
@@ -43,7 +45,7 @@ const LogIn = () => {
         onSubmit: (async (values) => {
             const res = await login(values)
             if(res.authorize) {
-                logIn(values as IUser)
+                push('/')
             }
         }),
     });
@@ -80,7 +82,7 @@ const LogIn = () => {
             'SecondButton': <Button onClick={async () => {
                 setStage(prev => prev + 1)
                 setProgress(50)
-            }}>Дальше</Button>,
+            }} type="button">Дальше</Button>,
         },
         {
             'CardDescription': <CardDescription>Вам на почту было направлен код, введите его</CardDescription>,
@@ -99,7 +101,7 @@ const LogIn = () => {
             'SecondButton': <Button onClick={() => {
                 setStage(prev => prev + 1)
                 setProgress(100)
-            }}>Подтвердить</Button>,
+            }} type="submit">Подтвердить</Button>,
         },
         {
             'CardDescription': authorize ?
@@ -124,18 +126,20 @@ const LogIn = () => {
             <Header without_buttons />
             <Content className="flex items-center justify-center">
                 <Card className="w-[350px]">
-                    <CardHeader>
-                        <CardTitle>Login</CardTitle>
-                        <Progress value={progress} className="w-[100%] h-2" />
-                        { stageContent[stage].CardDescription }
-                    </CardHeader>
-                    <CardContent>
-                        { stageContent[stage].Content }
-                    </CardContent>
-                    <CardFooter className="flex justify-between">
-                        { stageContent[stage].FirstButton }
-                        { stageContent[stage].SecondButton }
-                    </CardFooter>
+                    <form onSubmit={formik.handleSubmit}>
+                        <CardHeader>
+                            <CardTitle>Login</CardTitle>
+                            <Progress value={progress} className="w-[100%] h-2" />
+                            { stageContent[stage].CardDescription }
+                        </CardHeader>
+                        <CardContent>
+                            { stageContent[stage].Content }
+                        </CardContent>
+                        <CardFooter className="flex justify-between">
+                            { stageContent[stage].FirstButton }
+                            { stageContent[stage].SecondButton }
+                        </CardFooter>
+                    </form>
                 </Card>
             </Content>
         </div>

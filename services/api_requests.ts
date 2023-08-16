@@ -28,7 +28,7 @@ export async function register(values: Object) {
     return res
 }
 export async function login(values: Object) {
-    const res = await axios.post(`${api_url}api/auth/login`, {
+    const res = await  axios.post(`${api_url}api/auth/login`, {
         data: values,
     }).then(res => res.data)
     return res
