@@ -1,5 +1,5 @@
 import axios from "axios";
-import {deleteCookie} from "cookies-next";
+import {setCookie} from '@/services/setCookie';
 
 const api_url = process.env.NEXT_PUBLIC_API;
 export async function makeProblem(values: Object) {
@@ -18,16 +18,8 @@ export async function getProblem(id: string) {
 }
 
 export async function logout() {
-    try {
-        await deleteCookie('OutSideJWT', { path: '/', domain: 'localhost' });
-        return {
-            message: "Вы успешно вышли"
-        }
-    } catch(err) {
-        return {
-            message: `Что-то пошло не так: ${err}`
-        }
-    }
+    const res = await axios.post(`${api_url}api/auth/logout`).then(res => res.data)
+    return res
 }
 export async function register(values: Object) {
     const res = await axios.post(`${api_url}api/auth/signin`, {

@@ -2,8 +2,7 @@ import {sign} from "jsonwebtoken";
 import {serialize} from "cookie";
 import {NextResponse} from "next/server";
 
-const MAX_AGE = 60 * 60 * 24 * 30
-export async function setCookie(id: string) {
+export async function setCookie(id: string, MAX_AGE: number = 60 * 60 * 24 * 30) {
     try {
         const secret = process.env.JWT_SECRET || "";
         const token = sign({
